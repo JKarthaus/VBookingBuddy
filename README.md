@@ -1,27 +1,49 @@
-# VBookingBuddy
+## Micronaut 4.5.0 Documentation
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.7.
+- [User Guide](https://docs.micronaut.io/4.5.0/guide/index.html)
+- [API Reference](https://docs.micronaut.io/4.5.0/api/index.html)
+- [Configuration Reference](https://docs.micronaut.io/4.5.0/guide/configurationreference.html)
+- [Micronaut Guides](https://guides.micronaut.io/index.html)
+---
 
-## Development server
+- [Micronaut Gradle Plugin documentation](https://micronaut-projects.github.io/micronaut-gradle-plugin/latest/)
+- [GraalVM Gradle Plugin documentation](https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html)
+- [Shadow Gradle Plugin](https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow)
+## Feature openapi documentation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Micronaut OpenAPI Support documentation](https://micronaut-projects.github.io/micronaut-openapi/latest/guide/index.html)
 
-## Code scaffolding
+- [https://www.openapis.org](https://www.openapis.org)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Feature swagger-ui documentation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- [Micronaut Swagger UI documentation](https://micronaut-projects.github.io/micronaut-openapi/latest/guide/index.html)
 
-## Running unit tests
+- [https://swagger.io/tools/swagger-ui/](https://swagger.io/tools/swagger-ui/)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Feature lombok documentation
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- [Micronaut Project Lombok documentation](https://docs.micronaut.io/latest/guide/index.html#lombok)
 
-## Further help
+- [https://projectlombok.org/features/all](https://projectlombok.org/features/all)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Feature serialization-jackson documentation
+
+- [Micronaut Serialization Jackson Core documentation](https://micronaut-projects.github.io/micronaut-serialization/latest/guide/)
+
+
+## Feature object-storage-gcp documentation
+
+- [Micronaut Object Storage - GCP documentation](https://micronaut-projects.github.io/micronaut-object-storage/latest/guide/)
+
+- [https://cloud.google.com/storage](https://cloud.google.com/storage)
+
+
+## Feature micronaut-aot documentation
+
+- [Micronaut AOT documentation](https://micronaut-projects.github.io/micronaut-aot/latest/guide/)
+
+

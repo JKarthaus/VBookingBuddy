@@ -14,3 +14,5 @@ out/
 .classpath
 .factorypath
 /secret/
+/.angular/
+/frontend/node_modules/

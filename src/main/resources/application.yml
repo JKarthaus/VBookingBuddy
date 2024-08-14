@@ -9,3 +9,15 @@ micronaut:
       swagger-ui:
         paths: classpath:META-INF/swagger/views/swagger-ui
         mapping: /swagger-ui/**
+  security:
+    authentication: idtoken
+    oauth2:
+      clients:
+        google:
+          client-id: '${OAUTH_CLIENT_ID:xxx}'
+          client-secret: '${OAUTH_CLIENT_SECRET:yyy}'
+          openid:
+            issuer: 'https://accounts.google.com'
+    endpoints:
+      logout:
+        get-allowed: true

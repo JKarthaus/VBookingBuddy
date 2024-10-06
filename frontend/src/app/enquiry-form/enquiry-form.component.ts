@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatDatepickerInputEvent, MatDatepickerModule} from "@angular/material/datepicker";
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {MatInputModule} from "@angular/material/input";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
@@ -14,5 +14,7 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
   styleUrl: './enquiry-form.component.css'
 })
 export class EnquiryFormComponent {
-
+  checkDate(event: MatDatepickerInputEvent<Date>) {
+    console.log(event)
+  }
 }

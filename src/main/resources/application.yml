@@ -14,8 +14,8 @@ micronaut:
     oauth2:
       clients:
         google:
-          client-id: '${OAUTH_CLIENT_ID:xxx}'
-          client-secret: '${OAUTH_CLIENT_SECRET:yyy}'
+          client-id: '${OAUTH_CLIENT_ID}'
+          client-secret: '${OAUTH_CLIENT_SECRET}'
           openid:
             issuer: 'https://accounts.google.com'
     endpoints:

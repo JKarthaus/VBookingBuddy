@@ -2,6 +2,7 @@ package de.vBookingBuddy.service.impl;
 
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
@@ -16,6 +17,8 @@ import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,23 +45,48 @@ public class FirestoreServiceImpl implements FirestoreService {
     }
 
     @Override
-    public List<EventEntity> getPublicCalendarData() throws ExecutionException, InterruptedException {
+    public List<EventEntity> getPublicCalendarData(Instant start, Instant end) throws ExecutionException, InterruptedException {
         List<EventEntity> eventEntities = new ArrayList<>();
         // asynchronously retrieve all documents
-        ApiFuture<QuerySnapshot> future = firestore.collection("events").get();
+        ApiFuture<QuerySnapshot> future = firestore.collection("events")
+                .whereGreaterThan("dateStart", Timestamp.of(Date.from(start)))
+                .whereLessThan("dateEnd", Timestamp.of(Date.from(end)))
+                .get();
         // future.get() blocks on response
         List<QueryDocumentSnapshot> documents = future.get().getDocuments();
         for (QueryDocumentSnapshot document : documents) {
+            String color = "yellow";
+            if (document.get("state").equals("booked")) {
+                color = "green";
+            }
             eventEntities.add(
                     new EventEntity(
-                            "id",
+                            document.getId(),
                             true,
-                            new Date(),
-                            new Date(),
-                            "title",
-                            "green")
+                            document.get("dateStart", Timestamp.class).toDate(),
+                            document.get("dateEnd", Timestamp.class).toDate(),
+                            document.getString("description"),
+                            color
+                    )
             );
         }
         return eventEntities;
     }
+
+    @Override
+    public List<EventEntity> getEventsAtDate(Instant eventDate) throws ExecutionException, InterruptedException {
+        return getPublicCalendarData(
+                eventDate
+                        .atZone(ZoneOffset.of("Europe/Berlin"))
+                        .withHour(0)
+                        .withMinute(0)
+                        .toInstant(),
+                eventDate
+                        .atZone(ZoneOffset.of("Europe/Berlin"))
+                        .withHour(24)
+                        .withMinute(0)
+                        .toInstant()
+        );
+    }
+
 }

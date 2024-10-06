@@ -4,13 +4,17 @@ import {FullCalendarModule} from "@fullcalendar/angular";
 import {CalendarOptions} from "@fullcalendar/core";
 import multiMonthPlugin from '@fullcalendar/multimonth';
 import {EnquiryFormComponent} from "./enquiry-form/enquiry-form.component";
+import {MAT_DATE_LOCALE} from "@angular/material/core";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, FullCalendarModule, EnquiryFormComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'de-DE'}
+  ]
 })
 export class AppComponent {
   title = 'VBookingBuddy';

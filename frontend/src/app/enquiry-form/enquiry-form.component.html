@@ -1,15 +1,16 @@
 <form class="example-form">
   <mat-form-field>
     <mat-label>Datum der Anmietung</mat-label>
-    <input matInput [matDatepicker]="picker">
-    <mat-hint>MM/DD/YYYY</mat-hint>
+    <input matInput [matDatepicker]="picker" (dateChange)="checkDate($event)">
+    <mat-hint>Tag.Monat.Jahr</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
   <p></p>
   <mat-form-field class="example-full-width">
     <mat-label>Ihr Name</mat-label>
-    <input matInput placeholder="Else Elsenroth" value="">
+    <input matInput placeholder="Else Elsenroth" value=""
+    >
   </mat-form-field>
   <p></p>
   <mat-form-field class="example-full-width">

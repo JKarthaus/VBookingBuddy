@@ -4,6 +4,8 @@ import {MatDatepickerInputEvent, MatDatepickerModule} from "@angular/material/da
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {MatInputModule} from "@angular/material/input";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
+import {BackendService} from "../backend.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-enquiry-form',
@@ -14,7 +16,23 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
   styleUrl: './enquiry-form.component.css'
 })
 export class EnquiryFormComponent {
+
+
+  constructor(private backendService: BackendService) {
+  }
+
   checkDate(event: MatDatepickerInputEvent<Date>) {
-    console.log(event)
+    this.backendService.getEventsForDate(event.value?.toDateString())
+      .subscribe({
+          next: (v) => {
+            console.log("succeeded")
+          },
+          error: (e: HttpErrorResponse) => {
+            console.error(e.message)
+
+          },
+          complete: () => console.info('complete')
+        }
+      )
   }
 }

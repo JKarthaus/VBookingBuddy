@@ -16,3 +16,4 @@ out/
 /secret/
 /.angular/
 /frontend/node_modules/
+/frontend/.angular/

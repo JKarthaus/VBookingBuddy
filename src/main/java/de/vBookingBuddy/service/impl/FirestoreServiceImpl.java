@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
@@ -77,14 +78,14 @@ public class FirestoreServiceImpl implements FirestoreService {
     public List<EventEntity> getEventsAtDate(Instant eventDate) throws ExecutionException, InterruptedException {
         return getPublicCalendarData(
                 eventDate
-                        .atZone(ZoneOffset.of("Europe/Berlin"))
+                        .atZone(ZoneId.of("Europe/Berlin"))
                         .withHour(0)
                         .withMinute(0)
                         .toInstant(),
                 eventDate
-                        .atZone(ZoneOffset.of("Europe/Berlin"))
-                        .withHour(24)
-                        .withMinute(0)
+                        .atZone(ZoneId.of("Europe/Berlin"))
+                        .withHour(23)
+                        .withMinute(59)
                         .toInstant()
         );
     }

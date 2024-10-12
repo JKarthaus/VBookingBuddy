@@ -20,7 +20,7 @@ export interface eventsRequest {
   providedIn: 'root'
 })
 export class BackendService {
-  private baseUrl = "public/api/v1/";
+  private baseUrl = "api/public/v1/";
 
   constructor(private http: HttpClient) {
   }

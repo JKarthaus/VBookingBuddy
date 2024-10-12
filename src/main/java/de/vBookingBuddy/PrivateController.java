@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.Instant;
 import java.util.List;
 
-@Controller("private/api/v1")
+@Controller("api/private/v1")
 @RequiredArgsConstructor
 @Slf4j
 public class PrivateController {

@@ -22,7 +22,7 @@ export class EnquiryFormComponent {
   }
 
   checkDate(event: MatDatepickerInputEvent<Date>) {
-    this.backendService.getEventsForDate(event.value?.toDateString())
+    this.backendService.getEventsForDate(event.value?.toISOString())
       .subscribe({
           next: (v) => {
             console.log("succeeded")

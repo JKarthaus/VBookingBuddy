@@ -1,4 +1,24 @@
+<!--------------------------------------------------------------------------------------------------------------Actions-->
+<div ngbAccordion [closeOthers]="true" xmlns="http://www.w3.org/1999/html" #accMenue="ngbAccordion">
+  <!-- ######## STEP 1 - primary data ########                                            -->
+  <div ngbAccordionItem="accF1" [collapsed]="false">
+    <h2 ngbAccordionHeader>
+      <button ngbAccordionButton>
+        Basisdaten
+      </button>
+    </h2>
+    <div ngbAccordionCollapse>
+      <div ngbAccordionBody>
+        <ng-template>
+          <app-enquiry-form></app-enquiry-form>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
 
+<ngb-alert [dismissible]="false" type="danger">
+  <strong>Grande Maleur</strong>
+</ngb-alert>
 
-<app-enquiry-form></app-enquiry-form>
-<router-outlet />
+<router-outlet/>

@@ -1,0 +1,15 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Rabatte</mat-card-title>
+    <mat-card-subtitle>Sonderkonditionen</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions>
+    Mitglieder des Gemeinnützigen Vereines Elsenroth können die
+    Brunnenhütte zu einem Sonderpreis mieten.<br>
+    <mat-checkbox class="" [(ngModel)]="member">Ich bin Mitglied</mat-checkbox>
+    <p></p>
+    Wenn Ihre Gäste mehrheitlich über 25 Jahre alt sind, können wir
+    auf eine Kaution verzichten.
+    <mat-checkbox class="" [(ngModel)]="over25">Gäste sind ü25</mat-checkbox>
+  </mat-card-actions>
+</mat-card>

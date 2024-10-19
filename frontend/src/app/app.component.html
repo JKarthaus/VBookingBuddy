@@ -15,8 +15,37 @@
       </div>
     </div>
   </div>
+  <!-- ######## STEP 2 - extras ########                                                  -->
+  <div ngbAccordionItem="accF2" [collapsed]="true">
+    <h2 ngbAccordionHeader>
+      <button ngbAccordionButton>
+        Extras
+      </button>
+    </h2>
+    <div ngbAccordionCollapse>
+      <div ngbAccordionBody>
+        <ng-template>
+          <app-extras-form></app-extras-form>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <!-- ######## STEP 3 - summary ########                                                  -->
+  <div ngbAccordionItem="accF3" [collapsed]="true">
+    <h2 ngbAccordionHeader>
+      <button ngbAccordionButton>
+        Zusammenfassung
+      </button>
+    </h2>
+    <div ngbAccordionCollapse>
+      <div ngbAccordionBody>
+        <ng-template>
+          <app-summary-form></app-summary-form>
+        </ng-template>
+      </div>
+    </div>
+  </div>
 </div>
-
 <ngb-alert [dismissible]="false" type="danger">
   <strong>Grande Maleur</strong>
 </ngb-alert>

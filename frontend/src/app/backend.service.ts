@@ -20,7 +20,11 @@ export interface bookingRequest {
   date?: string,
   name?: string,
   email?: string,
-  phone?: string
+  phone?: string,
+  partyBox?: boolean,
+  lightCube?: boolean,
+  cubeCount?: number,
+  grill?: boolean
 }
 
 
@@ -39,8 +43,14 @@ export class BackendService {
   private baseUrl = "api/public/v1/";
   private _formOK: boolean = false;
   bookingRequest: bookingRequest = {
+    date: "",
+    name: "",
     email: "",
-    phone: ""
+    phone: "",
+    partyBox: false,
+    lightCube: false,
+    cubeCount: 1,
+    grill: true
   }
 
   constructor(private http: HttpClient) {

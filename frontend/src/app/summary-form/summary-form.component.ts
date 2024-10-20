@@ -16,8 +16,7 @@ export class SummaryFormComponent {
   member: any;
   over25: any;
 
-  constructor(private backendService: BackendService) {
-    console.log("Email:" + backendService.bookingRequest.email)
+  constructor(protected backendService: BackendService) {
   }
 
 }

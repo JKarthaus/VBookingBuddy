@@ -1,6 +1,11 @@
 <mat-form-field>
   <mat-label>Datum der Anmietung</mat-label>
-  <input matInput [matDatepicker]="picker" (dateChange)="checkDate($event)">
+  <input
+    matInput
+    [matDatepicker]="picker"
+    (dateChange)="checkDate($event)"
+    [(ngModel)]="date"
+  >
   <mat-hint>Tag.Monat.Jahr</mat-hint>
   <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>

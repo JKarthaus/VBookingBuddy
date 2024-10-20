@@ -19,6 +19,13 @@
   <mat-card-header>
     <mat-card-title-group>
       <mat-checkbox class="" [(ngModel)]="lightCube">Buchen</mat-checkbox>
+      <mat-label>Select</mat-label>
+      <mat-select [(ngModel)]="cubeCount">
+        <mat-option value="1">1 Light Cube</mat-option>
+        <mat-option value="2">2 Light Cubes</mat-option>
+        <mat-option value="3">3 Light Cubes</mat-option>
+        <mat-option value="4">4 Light Cubes</mat-option>
+      </mat-select>
       <mat-card-title>Light Cube</mat-card-title>
       <mat-card-subtitle>IBC - Stehtische</mat-card-subtitle>
       <img mat-card-md-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"

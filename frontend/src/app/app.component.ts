@@ -5,6 +5,11 @@ import {MAT_DATE_LOCALE} from "@angular/material/core";
 import {NgbAccordionDirective, NgbAccordionModule, NgbAlert} from "@ng-bootstrap/ng-bootstrap";
 import {ExtrasFormComponent} from "./extras-form/extras-form.component";
 import {SummaryFormComponent} from "./summary-form/summary-form.component";
+import {MatToolbar} from "@angular/material/toolbar";
+import {MatIcon} from "@angular/material/icon";
+import {MatDivider} from "@angular/material/divider";
+import {BackendService} from "./backend.service";
+import {MatDialogClose} from "@angular/material/dialog";
 
 @Component(
   {
@@ -16,7 +21,11 @@ import {SummaryFormComponent} from "./summary-form/summary-form.component";
       NgbAccordionModule,
       NgbAlert,
       ExtrasFormComponent,
-      SummaryFormComponent
+      SummaryFormComponent,
+      MatToolbar,
+      MatIcon,
+      MatDivider,
+      MatDialogClose
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
@@ -28,6 +37,23 @@ import {SummaryFormComponent} from "./summary-form/summary-form.component";
 export class AppComponent implements AfterViewInit {
   @ViewChild('accMenue') accMenue!: NgbAccordionDirective;
   title = 'VBookingBuddy &#9400; by JK';
+
+  formState = ""
+  alertClose = true;
+
+  constructor(private backendService: BackendService) {
+
+  }
+
+  checkAndSend() {
+    if (this.backendService.bookingRequest.date = "") {
+      this.formState = "Datum fehlt"
+    }
+    if (!this.backendService.formOK) {
+      this.alertClose = false;
+      console.log("check");
+    }
+  }
 
   ngAfterViewInit() {
   }

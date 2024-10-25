@@ -1,3 +1,6 @@
+<mat-toolbar>
+  <span>Elsenroth Reservierungs APP</span>
+</mat-toolbar>
 <!--------------------------------------------------------------------------------------------------------------Actions-->
 <div ngbAccordion [closeOthers]="true" xmlns="http://www.w3.org/1999/html" #accMenue="ngbAccordion">
   <!-- ######## STEP 1 - primary data ########                                            -->
@@ -46,8 +49,15 @@
     </div>
   </div>
 </div>
-<ngb-alert [dismissible]="false" type="danger">
-  <strong>Grande Maleur</strong>
+<mat-divider></mat-divider>
+<section>
+  <div class="example-button-row">
+    <button mat-flat-button (click)="checkAndSend()">Anfrage absenden</button>
+  </div>
+</section>
+
+<ngb-alert [dismissible]="false" [mat-dialog-close]="alertClose" type="submit">
+  <strong>{{ formState }}</strong>
 </ngb-alert>
 
 <router-outlet/>

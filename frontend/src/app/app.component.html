@@ -56,8 +56,18 @@
   </div>
 </section>
 
-<ngb-alert [dismissible]="false" [mat-dialog-close]="alertClose" type="submit">
-  <strong>{{ formState }}</strong>
-</ngb-alert>
+@if (formStateMessage) {
+  <ngb-alert #selfClosingAlert (closed)="formStateMessage = ''" type="error">
+    <strong>{{ formStateMessage }}</strong>
+  </ngb-alert>
+}
+@if (showFormSavedInfo) {
+  <ngb-alert #formSavedInfo (closed)="showFormSavedInfo=false" type="success">
+    <strong>
+      Ihre Anfrage wurde weitergeleitet.<br>
+      Inn kürze werden Sie per Mail oder Telefon kontaktiert.
+    </strong>
+  </ngb-alert>
+}
 
 <router-outlet/>

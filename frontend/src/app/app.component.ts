@@ -10,6 +10,9 @@ import {MatIcon} from "@angular/material/icon";
 import {MatDivider} from "@angular/material/divider";
 import {BackendService} from "./backend.service";
 import {MatDialogClose} from "@angular/material/dialog";
+import {debounceTime, Subject, tap} from "rxjs";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component(
   {
@@ -35,24 +38,66 @@ import {MatDialogClose} from "@angular/material/dialog";
   }
 )
 export class AppComponent implements AfterViewInit {
-  @ViewChild('accMenue') accMenue!: NgbAccordionDirective;
   title = 'VBookingBuddy &#9400; by JK';
 
-  formState = ""
-  alertClose = true;
+  private _formStateMessage$ = new Subject<string>();
+  private _formSavedResponse$ = new Subject<string>();
+
+  formStateMessage = '';
+  showFormSavedInfo = false;
+
+  @ViewChild('accMenue') accMenue!: NgbAccordionDirective;
+  @ViewChild('selfClosingAlert', {static: false}) selfClosingAlert: NgbAlert | undefined;
+  @ViewChild('formSavedInfo', {static: false}) formSavedInfo: NgbAlert | undefined;
 
   constructor(private backendService: BackendService) {
+    this._formStateMessage$.pipe(
+      takeUntilDestroyed(),
+      tap((message) => (this.formStateMessage = message)),
+      debounceTime(4000),
+    ).subscribe(() => this.selfClosingAlert?.close());
 
+    this._formSavedResponse$.pipe(
+      takeUntilDestroyed(),
+      debounceTime(4000),
+    ).subscribe(() => this.selfClosingAlert?.close());
   }
 
   checkAndSend() {
-    if (this.backendService.bookingRequest.date = "") {
-      this.formState = "Datum fehlt"
+    let message = "";
+    if (this.backendService.bookingRequest.date?.length == 0) {
+      message += "Datum fehlt.\r<br>"
     }
-    if (!this.backendService.formOK) {
-      this.alertClose = false;
-      console.log("check");
+    if (!this.backendService.dateVerified) {
+      message += "Datum nicht verfügbar.\r<br>"
     }
+    if (this.backendService.bookingRequest.name?.trim().length == 0) {
+      message += "Name fehlt.<br>"
+    }
+    if (this.backendService.bookingRequest.email?.trim().length == 0) {
+      message += "Mail Adresse fehlt.<br>"
+    }
+    if (this.backendService.bookingRequest.phone?.trim().length == 0) {
+      message += "Telefonnummer fehlt.<br>"
+    }
+    if (message.length > 0) {
+      this._formStateMessage$.next(message)
+    } else {
+      this.backendService.sendEventRequest()
+        .subscribe({
+            next: (v) => {
+              console.log("succeeded")
+              this.showFormSavedInfo = true;
+              this.backendService.resetBookingRequest();
+            },
+            error: (e: HttpErrorResponse) => {
+              console.error(e.message)
+            },
+            complete: () => console.info('complete')
+          }
+        )
+    }
+
   }
 
   ngAfterViewInit() {

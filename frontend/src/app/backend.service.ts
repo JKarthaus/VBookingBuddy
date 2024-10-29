@@ -32,34 +32,49 @@ export interface bookingRequest {
   providedIn: 'root'
 })
 export class BackendService {
-  get formOK(): boolean {
-    return this._formOK;
+  get dateVerified(): boolean {
+    return this._dateVerified;
   }
 
-  set formOK(value: boolean) {
-    this._formOK = value;
+  set dateVerified(value: boolean) {
+    this._dateVerified = value;
   }
 
   private baseUrl = "api/public/v1/";
-  private _formOK: boolean = false;
-  bookingRequest: bookingRequest = {
-    date: "",
-    name: "",
-    email: "",
-    phone: "",
-    partyBox: false,
-    lightCube: false,
-    cubeCount: 1,
-    grill: true
+  private _dateVerified: boolean = false;
+  bookingRequest: bookingRequest = {}
+  // -- Prices
+  basePrice = 150;
+
+
+
+  resetBookingRequest() {
+    this.bookingRequest = {
+      date: "",
+      name: "",
+      email: "",
+      phone: "",
+      partyBox: false,
+      lightCube: false,
+      cubeCount: 1,
+      grill: true
+    }
   }
 
   constructor(private http: HttpClient) {
+    this.resetBookingRequest()
   }
 
   public getEventsForDate(date?: string) {
     return this
       .http
       .get<any>(this.baseUrl + "eventRequest?requestDate=" + date, httpOptions)
+  }
+
+  public sendEventRequest() {
+    return this
+      .http
+      .post<any>(this.baseUrl + "storeEventRequest", this.bookingRequest, httpOptions)
   }
 
 }

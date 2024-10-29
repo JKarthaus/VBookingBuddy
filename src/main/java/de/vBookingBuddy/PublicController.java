@@ -1,7 +1,10 @@
 package de.vBookingBuddy;
 
 import de.vBookingBuddy.mapper.EventMapper;
+import de.vBookingBuddy.mapper.PriceListMapper;
 import de.vBookingBuddy.model.FullCalendarEvent;
+import de.vBookingBuddy.model.PriceListResponse;
+import de.vBookingBuddy.service.PriceService;
 import de.vBookingBuddy.service.impl.FirestoreServiceImpl;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.HttpStatus;
@@ -25,7 +28,9 @@ import java.util.List;
 public class PublicController {
 
     private final FirestoreServiceImpl firestoreService;
+    private final PriceService priceService;
     private final EventMapper eventMapper;
+    private final PriceListMapper priceListMapper;
 
     // ---------------------------------------------------------------------------------------
     @Get(uri = "/eventData", produces = "text/json")
@@ -77,5 +82,26 @@ public class PublicController {
             );
         }
     }
-
+    // ---------------------------------------------------------------------------------------
+    @Get(uri = "/priceList", produces = "text/json")
+    @Secured(SecurityRule.IS_AUTHENTICATED)
+    @Tag(name = "public")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "500", description = "server error occurred"),
+    })
+    public HttpResponse<PriceListResponse> getPriceList() {
+        try {
+            return HttpResponse.ok(
+                    priceListMapper.toResponse(
+                            priceService.getPriceList()
+                    )
+            );
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return HttpResponse.status(
+                    HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()
+            );
+        }
+    }
 }

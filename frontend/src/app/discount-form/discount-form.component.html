@@ -1,1 +1,29 @@
-<p>discount-form works!</p>
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Vereinsmitglieder</mat-card-title>
+    <mat-card-subtitle>Sonderkonditionen</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    Mitglieder des Gemeinnützigen Vereines Elsenroth können die
+    Brunnenhütte zu einem Sonderpreis mieten.
+    <p></p>
+    <mat-checkbox class="" [(ngModel)]="member">
+      Ich bin Mitglied des Gemeinnützigen Vereines Elsenroth
+    </mat-checkbox>
+  </mat-card-content>
+</mat-card>
+<p></p>
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Mid Age Gäste</mat-card-title>
+    <mat-card-subtitle>Sonderkonditionen</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    Wenn Ihre Gäste mehrheitlich über 25 Jahre alt sind, können wir
+    auf eine Kaution verzichten.
+    <p></p>
+    <mat-checkbox class="" [(ngModel)]="over25">
+      Gäste sind mehrheitlich älter als 25 Jahre
+    </mat-checkbox>
+  </mat-card-content>
+</mat-card>

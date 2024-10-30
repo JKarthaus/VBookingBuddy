@@ -13,6 +13,7 @@ import {MatDialogClose} from "@angular/material/dialog";
 import {debounceTime, Subject, tap} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {HttpErrorResponse} from "@angular/common/http";
+import {DiscountFormComponent} from "./discount-form/discount-form.component";
 
 @Component(
   {
@@ -28,7 +29,8 @@ import {HttpErrorResponse} from "@angular/common/http";
       MatToolbar,
       MatIcon,
       MatDivider,
-      MatDialogClose
+      MatDialogClose,
+      DiscountFormComponent
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',

@@ -33,8 +33,23 @@
       </div>
     </div>
   </div>
-  <!-- ######## STEP 3 - summary ########                                                  -->
+  <!-- ######## STEP 3 - discount ########                                                  -->
   <div ngbAccordionItem="accF3" [collapsed]="true">
+    <h2 ngbAccordionHeader>
+      <button ngbAccordionButton>
+        Rabatte
+      </button>
+    </h2>
+    <div ngbAccordionCollapse>
+      <div ngbAccordionBody>
+        <ng-template>
+          <app-discount-form></app-discount-form>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <!-- ######## STEP 4 - summary ########                                                  -->
+  <div ngbAccordionItem="accF4" [collapsed]="true">
     <h2 ngbAccordionHeader>
       <button ngbAccordionButton>
         Zusammenfassung

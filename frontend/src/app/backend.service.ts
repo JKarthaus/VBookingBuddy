@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -27,6 +27,16 @@ export interface bookingRequest {
   grill?: boolean
 }
 
+export interface priceList {
+  basePrice?: number,
+  partyBox?: number,
+  lightCube?: number,
+  grill?: number,
+  discountMemberGVE?: boolean,
+  discountAllCubes?: boolean,
+  deposit?: number,
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -43,10 +53,7 @@ export class BackendService {
   private baseUrl = "api/public/v1/";
   private _dateVerified: boolean = false;
   bookingRequest: bookingRequest = {}
-  // -- Prices
-  basePrice = 150;
-
-
+  priceList: priceList = {}
 
   resetBookingRequest() {
     this.bookingRequest = {
@@ -63,6 +70,7 @@ export class BackendService {
 
   constructor(private http: HttpClient) {
     this.resetBookingRequest()
+    this.getPriceList()
   }
 
   public getEventsForDate(date?: string) {
@@ -75,6 +83,24 @@ export class BackendService {
     return this
       .http
       .post<any>(this.baseUrl + "storeEventRequest", this.bookingRequest, httpOptions)
+  }
+
+  public getPriceList() {
+    return this
+      .http
+      .get<priceList>(this.baseUrl + "/priceList", httpOptions)
+      .subscribe(
+        {
+          next: (priceList) => {
+            console.log("get PriceList from Server")
+            this.priceList = priceList
+          },
+          error: (e: HttpErrorResponse) => {
+            console.error(e.message)
+          },
+          complete: () => console.info('complete')
+        }
+      )
   }
 
 }

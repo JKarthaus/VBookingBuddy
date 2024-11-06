@@ -24,7 +24,9 @@ export interface bookingRequest {
   partyBox?: boolean,
   lightCube?: boolean,
   cubeCount?: number,
-  grill?: boolean
+  grill?: boolean,
+  gveMember?: boolean,
+  agedGuests?: boolean
 }
 
 export interface priceList {
@@ -32,8 +34,8 @@ export interface priceList {
   partyBox?: number,
   lightCube?: number,
   grill?: number,
-  discountMemberGVE?: boolean,
-  discountAllCubes?: boolean,
+  discountMemberGVE?: number,
+  discountAllCubes?: number,
   deposit?: number,
 }
 
@@ -64,7 +66,9 @@ export class BackendService {
       partyBox: false,
       lightCube: false,
       cubeCount: 1,
-      grill: true
+      grill: false,
+      gveMember: false,
+      agedGuests: false
     }
   }
 
@@ -82,7 +86,25 @@ export class BackendService {
   public sendEventRequest() {
     return this
       .http
-      .post<any>(this.baseUrl + "storeEventRequest", this.bookingRequest, httpOptions)
+      .post<any>(this.baseUrl + "storeReservationRequest", this.bookingRequest, httpOptions)
+  }
+
+  public calcPrice(): number {
+    let result = this.priceList.basePrice ?? 0;
+    result += this.priceList.deposit ?? 0;
+    if (this.bookingRequest.grill) {
+      result += this.priceList.grill ?? 0;
+    }
+    if (this.bookingRequest.lightCube) {
+      result += (this.priceList.lightCube ?? 0) * (this.bookingRequest.cubeCount ?? 0);
+    }
+    if (this.bookingRequest.gveMember) {
+      result -= this.priceList.discountMemberGVE ?? 0
+    }
+    if (this.bookingRequest.agedGuests) {
+      result -= this.priceList.deposit ?? 0
+    }
+    return result;
   }
 
   public getPriceList() {

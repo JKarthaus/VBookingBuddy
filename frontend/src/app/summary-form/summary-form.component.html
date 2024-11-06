@@ -1,7 +1,34 @@
 <p></p>
 <mat-card appearance="outlined">
   <mat-card-content>Zusammenfassung Anfrage</mat-card-content>
-  Name : {{backendService.bookingRequest.name}}
+  <h1>Kontaktdaten</h1>
+  Name : {{ backendService.bookingRequest.name }}<br>
+  Telefonnummer: {{ backendService.bookingRequest.phone }}<br>
+  Email : {{ backendService.bookingRequest.email }}
+  Datum zur Anmietung : {{ backendService.bookingRequest.date }}
+  <h1>Kosten</h1>
+  Basispreis : {{ backendService.priceList.basePrice }} EUR<br>
+  Strom : 0,30 EUR pro KW/h<br>
+  Kaution : {{ backendService.priceList.deposit }} EUR<br>
+  <h2>Extras</h2>
+  @if (backendService.bookingRequest.partyBox) {
+    Party Box : {{ backendService.priceList.partyBox }} EUR<br>
+  }
+  @if (backendService.bookingRequest.grill) {
+    Gastro Grill : {{ backendService.priceList.grill }} EUR<br>
+  }
+  @if (backendService.bookingRequest.lightCube) {
+    IBC Light Cubes : {{ backendService.priceList.lightCube }} EUR<br>
+  }
+  <h2>Rabatte</h2>
+  @if (backendService.bookingRequest.gveMember) {
+    Vereinsmitglied : -{{ backendService.priceList.lightCube }} EUR<br>
+  }
+  @if (backendService.bookingRequest.agedGuests == false) {
+    Erlass Kaution : -{{ backendService.priceList.deposit }} EUR<br>
+  }
+  <hr>
+  <h3>Gesamtpreis:{{ backendService.calcPrice() }} EUR + Stromkosten</h3>
 </mat-card>
 
 

@@ -14,6 +14,7 @@ import {debounceTime, Subject, tap} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {HttpErrorResponse} from "@angular/common/http";
 import {DiscountFormComponent} from "./discount-form/discount-form.component";
+import {MatButton} from "@angular/material/button";
 
 @Component(
   {
@@ -30,7 +31,8 @@ import {DiscountFormComponent} from "./discount-form/discount-form.component";
       MatIcon,
       MatDivider,
       MatDialogClose,
-      DiscountFormComponent
+      DiscountFormComponent,
+      MatButton
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
@@ -62,10 +64,11 @@ export class AppComponent implements AfterViewInit {
     this._formSavedResponse$.pipe(
       takeUntilDestroyed(),
       debounceTime(4000),
-    ).subscribe(() => this.selfClosingAlert?.close());
+    ).subscribe(() => this.formSavedInfo?.close());
   }
 
   checkAndSend() {
+    this.accMenue.collapseAll()
     let message = "";
     if (this.backendService.bookingRequest.date?.length == 0) {
       message += "Datum fehlt.\r<br>"
@@ -89,6 +92,7 @@ export class AppComponent implements AfterViewInit {
         .subscribe({
             next: (v) => {
               console.log("succeeded")
+              this._formSavedResponse$.next("")
               this.showFormSavedInfo = true;
               this.backendService.resetBookingRequest();
             },

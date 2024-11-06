@@ -13,16 +13,16 @@
 <p></p>
 <mat-form-field class="example-full-width">
   <mat-label>Ihr Name</mat-label>
-  <input matInput placeholder="" [(ngModel)]="name">
+  <input matInput placeholder="" [(ngModel)]="name" (change)="dataChange()">
 </mat-form-field>
 <p></p>
 <mat-form-field class="example-full-width">
   <mat-label>Ihre Email Adresse</mat-label>
-  <input matInput placeholder="" [(ngModel)]="eMail">
+  <input matInput placeholder="" [(ngModel)]="eMail" (change)="dataChange()">
 </mat-form-field>
 <p></p>
 <mat-form-field class="example-full-width">
   <mat-label>Ihre Telefon Nummer</mat-label>
-  <input matInput placeholder="" [(ngModel)]="phoneNumber">
+  <input matInput placeholder="" [(ngModel)]="phoneNumber" (change)="dataChange()">
 </mat-form-field>
 

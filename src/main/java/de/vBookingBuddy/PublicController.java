@@ -2,15 +2,15 @@ package de.vBookingBuddy;
 
 import de.vBookingBuddy.mapper.EventMapper;
 import de.vBookingBuddy.mapper.PriceListMapper;
+import de.vBookingBuddy.mapper.ReservationRequestMapper;
 import de.vBookingBuddy.model.FullCalendarEvent;
 import de.vBookingBuddy.model.PriceListResponse;
+import de.vBookingBuddy.model.ReservationRequest;
 import de.vBookingBuddy.service.PriceService;
 import de.vBookingBuddy.service.impl.FirestoreServiceImpl;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.HttpStatus;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.QueryValue;
+import io.micronaut.http.annotation.*;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.rules.SecurityRule;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -31,6 +31,31 @@ public class PublicController {
     private final PriceService priceService;
     private final EventMapper eventMapper;
     private final PriceListMapper priceListMapper;
+    private final ReservationRequestMapper reservationRequestMapper;
+
+    // ---------------------------------------------------------------------------------------
+    @Post(uri = "/storeReservationRequest", produces = "text/json")
+    @Secured(SecurityRule.IS_ANONYMOUS)
+    @Tag(name = "public")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "500", description = "server error occurred"),
+    })
+    public HttpResponse<?> storeReservationRequest(
+            @Body ReservationRequest reservationRequest
+    ) {
+        try {
+            firestoreService.storeReservationEntity(
+                    reservationRequestMapper.toEntity(reservationRequest)
+            );
+            return HttpResponse.ok();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return HttpResponse.status(
+                    HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()
+            );
+        }
+    }
 
     // ---------------------------------------------------------------------------------------
     @Get(uri = "/eventData", produces = "text/json")
@@ -60,7 +85,7 @@ public class PublicController {
 
     // ---------------------------------------------------------------------------------------
     @Get(uri = "/eventRequest", produces = "text/json")
-    @Secured(SecurityRule.IS_AUTHENTICATED)
+    @Secured(SecurityRule.IS_ANONYMOUS)
     @Tag(name = "public")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
@@ -82,6 +107,7 @@ public class PublicController {
             );
         }
     }
+
     // ---------------------------------------------------------------------------------------
     @Get(uri = "/priceList", produces = "text/json")
     @Secured(SecurityRule.IS_AUTHENTICATED)

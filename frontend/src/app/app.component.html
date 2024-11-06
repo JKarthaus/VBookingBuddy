@@ -6,7 +6,7 @@
   <!-- ######## STEP 1 - primary data ########                                            -->
   <div ngbAccordionItem="accF1" [collapsed]="false">
     <h2 ngbAccordionHeader>
-      <button ngbAccordionButton>
+      <button ngbAccordionButton style="padding: 0">
         Basisdaten
       </button>
     </h2>
@@ -21,7 +21,7 @@
   <!-- ######## STEP 2 - extras ########                                                  -->
   <div ngbAccordionItem="accF2" [collapsed]="true">
     <h2 ngbAccordionHeader>
-      <button ngbAccordionButton>
+      <button ngbAccordionButton style="padding: 0">
         Extras
       </button>
     </h2>
@@ -36,7 +36,7 @@
   <!-- ######## STEP 3 - discount ########                                                  -->
   <div ngbAccordionItem="accF3" [collapsed]="true">
     <h2 ngbAccordionHeader>
-      <button ngbAccordionButton>
+      <button ngbAccordionButton style="padding: 0">
         Rabatte
       </button>
     </h2>
@@ -51,7 +51,7 @@
   <!-- ######## STEP 4 - summary ########                                                  -->
   <div ngbAccordionItem="accF4" [collapsed]="true">
     <h2 ngbAccordionHeader>
-      <button ngbAccordionButton>
+      <button ngbAccordionButton style="padding: 0">
         Zusammenfassung
       </button>
     </h2>
@@ -65,14 +65,14 @@
   </div>
 </div>
 <mat-divider></mat-divider>
-<section>
+<div class="text-center">
   <div class="example-button-row">
     <button mat-flat-button (click)="checkAndSend()">Anfrage absenden</button>
   </div>
-</section>
+</div>
 
 @if (formStateMessage) {
-  <ngb-alert #selfClosingAlert (closed)="formStateMessage = ''" type="error">
+  <ngb-alert #selfClosingAlert (closed)="formStateMessage = ''" type="danger">
     <strong>{{ formStateMessage }}</strong>
   </ngb-alert>
 }

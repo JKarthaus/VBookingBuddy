@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component} from '@angular/core';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatDatepickerInputEvent, MatDatepickerModule} from "@angular/material/datepicker";
 import {provideNativeDateAdapter} from "@angular/material/core";
@@ -17,7 +17,7 @@ import {FormsModule} from "@angular/forms";
   styleUrl: './enquiry-form.component.css'
 })
 
-export class EnquiryFormComponent implements OnDestroy {
+export class EnquiryFormComponent {
   eMail: string | undefined = " "
   phoneNumber: string | undefined = " "
   name: string | undefined = " "
@@ -31,7 +31,7 @@ export class EnquiryFormComponent implements OnDestroy {
   }
 
 
-  ngOnDestroy() {
+  dataChange() {
     this.backendService.bookingRequest.email = this.eMail
     this.backendService.bookingRequest.phone = this.phoneNumber
     this.backendService.bookingRequest.name = this.name
@@ -39,11 +39,13 @@ export class EnquiryFormComponent implements OnDestroy {
   }
 
   checkDate(event: MatDatepickerInputEvent<Date>) {
+    this.backendService.dateVerified = false
     this.backendService.getEventsForDate(event.value?.toISOString())
       .subscribe({
           next: (v) => {
-            console.log("succeeded")
+            // TODO : implement date verified
             this.backendService.bookingRequest.date = event.value?.toISOString();
+            this.backendService.dateVerified = true;
           },
           error: (e: HttpErrorResponse) => {
             console.error(e.message)

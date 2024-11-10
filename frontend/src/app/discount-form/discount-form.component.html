@@ -7,7 +7,7 @@
     Mitglieder des Gemeinnützigen Vereines Elsenroth können die
     Brunnenhütte zu einem Sonderpreis mieten.
     <p></p>
-    <mat-checkbox class="" [(ngModel)]="member">
+    <mat-checkbox class="" [(ngModel)]="member" (change)="changeForm()">
       Ich bin Mitglied des Gemeinnützigen Vereines Elsenroth
     </mat-checkbox>
   </mat-card-content>
@@ -22,7 +22,7 @@
     Wenn Ihre Gäste mehrheitlich über 25 Jahre alt sind, können wir
     auf eine Kaution verzichten.
     <p></p>
-    <mat-checkbox class="" [(ngModel)]="agedGuests">
+    <mat-checkbox class="" [(ngModel)]="agedGuests" (change)="changeForm()">
       Gäste sind mehrheitlich älter als 25 Jahre
     </mat-checkbox>
   </mat-card-content>

@@ -23,7 +23,7 @@ import {BackendService} from "../backend.service";
   styleUrl: './extras-form.component.css'
 })
 
-export class ExtrasFormComponent implements OnDestroy {
+export class ExtrasFormComponent {
   musicBox: boolean | undefined = false;
   lightCube: boolean | undefined = false;
   grill: boolean | undefined = false;
@@ -36,7 +36,7 @@ export class ExtrasFormComponent implements OnDestroy {
     this.cubeCount = backendService.bookingRequest.cubeCount;
   }
 
-  ngOnDestroy(): void {
+  changeForm(): void {
     this.backendService.bookingRequest.partyBox = this.musicBox;
     this.backendService.bookingRequest.lightCube = this.lightCube;
     this.backendService.bookingRequest.grill = this.grill;

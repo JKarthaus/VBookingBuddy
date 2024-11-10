@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component} from '@angular/core';
 import {
   MatCard,
   MatCardActions,
@@ -27,7 +27,7 @@ import {FormsModule} from "@angular/forms";
   templateUrl: './discount-form.component.html',
   styleUrl: './discount-form.component.css'
 })
-export class DiscountFormComponent implements OnDestroy {
+export class DiscountFormComponent {
   member: any;
   agedGuests: any;
 
@@ -37,9 +37,10 @@ export class DiscountFormComponent implements OnDestroy {
 
   }
 
-  ngOnDestroy(): void {
+  changeForm(): void {
     this.backendService.bookingRequest.gveMember = this.member;
     this.backendService.bookingRequest.agedGuests = this.agedGuests;
   }
+
 
 }

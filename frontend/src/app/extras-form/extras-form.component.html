@@ -1,7 +1,11 @@
 <mat-card class="example-card" appearance="outlined">
   <mat-card-header>
     <mat-card-title-group>
-      <mat-checkbox class="" [(ngModel)]="musicBox">Buchen</mat-checkbox>
+      <mat-checkbox
+        class=""
+        [(ngModel)]="musicBox"
+        (change)="changeForm()">Buchen
+      </mat-checkbox>
       <mat-card-title>Musik</mat-card-title>
       <mat-card-subtitle>JBL Partylautsprecher</mat-card-subtitle>
       <img mat-card-md-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
@@ -18,9 +22,15 @@
 <mat-card class="example-card" appearance="outlined">
   <mat-card-header>
     <mat-card-title-group>
-      <mat-checkbox class="" [(ngModel)]="lightCube">Buchen</mat-checkbox>
+      <mat-checkbox
+        class=""
+        [(ngModel)]="lightCube"
+        (change)="changeForm()">Buchen
+      </mat-checkbox>
       <mat-label>Select</mat-label>
-      <mat-select [(ngModel)]="cubeCount">
+      <mat-select
+        [(ngModel)]="cubeCount"
+        (change)="changeForm()">
         <mat-option value="1">1 Light Cube</mat-option>
         <mat-option value="2">2 Light Cubes</mat-option>
         <mat-option value="3">3 Light Cubes</mat-option>
@@ -41,7 +51,11 @@
 <mat-card class="example-card" appearance="outlined">
   <mat-card-header>
     <mat-card-title-group>
-      <mat-checkbox class="" [(ngModel)]="grill">Buchen</mat-checkbox>
+      <mat-checkbox
+        class=""
+        [(ngModel)]="grill"
+        (change)="changeForm()">Buchen
+      </mat-checkbox>
       <mat-card-title>Grill</mat-card-title>
       <mat-card-subtitle>Großer Gastro-Grill</mat-card-subtitle>
       <img mat-card-md-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"

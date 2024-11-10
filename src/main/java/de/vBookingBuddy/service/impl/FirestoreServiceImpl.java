@@ -6,7 +6,6 @@ import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
-import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
@@ -18,6 +17,7 @@ import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.util.*;
@@ -91,6 +91,13 @@ public class FirestoreServiceImpl implements FirestoreService {
 
     public void storeReservationEntity(Map<String, Object> reservationRequestData) throws ExecutionException, InterruptedException {
         // Add a new document (asynchronously) in collection "cities" with id "LA"
+        reservationRequestData.put(
+                "history",
+                Arrays.asList("""
+                        Reservierungsanfrage eingegangen am: """
+                        + new SimpleDateFormat("dd MMMM yyyy hh:mm:ss") +
+                        """)
+        );
         ApiFuture<WriteResult> future = firestore
                 .collection("reservationRequest")
                 .document(UUID.randomUUID().toString()).set(reservationRequestData);

@@ -6,6 +6,7 @@ import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
@@ -93,10 +94,10 @@ public class FirestoreServiceImpl implements FirestoreService {
         // Add a new document (asynchronously) in collection "cities" with id "LA"
         reservationRequestData.put(
                 "history",
-                Arrays.asList("""
-                        Reservierungsanfrage eingegangen am: """
-                        + new SimpleDateFormat("dd MMMM yyyy hh:mm:ss") +
-                        """)
+                Arrays.asList("Reservierungsanfrage eingegangen am: "
+                                + new SimpleDateFormat("dd MMMM yyyy hh:mm:ss"
+                        )
+                )
         );
         ApiFuture<WriteResult> future = firestore
                 .collection("reservationRequest")

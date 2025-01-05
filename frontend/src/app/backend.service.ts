@@ -110,7 +110,7 @@ export class BackendService {
   public getPriceList() {
     return this
       .http
-      .get<priceList>(this.baseUrl + "/priceList", httpOptions)
+      .get<priceList>(this.baseUrl + "priceList", httpOptions)
       .subscribe(
         {
           next: (priceList) => {

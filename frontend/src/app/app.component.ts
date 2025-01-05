@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, inject, ViewChild} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {EnquiryFormComponent} from "./enquiry-form/enquiry-form.component";
 import {MAT_DATE_LOCALE} from "@angular/material/core";
-import {NgbAccordionDirective, NgbAccordionModule, NgbAlert} from "@ng-bootstrap/ng-bootstrap";
+import {NgbAccordionDirective, NgbAccordionModule, NgbAlert, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ExtrasFormComponent} from "./extras-form/extras-form.component";
 import {SummaryFormComponent} from "./summary-form/summary-form.component";
 import {MatToolbar} from "@angular/material/toolbar";
@@ -44,8 +44,9 @@ import {MatButton} from "@angular/material/button";
 export class AppComponent implements AfterViewInit {
   title = 'VBookingBuddy &#9400; by JK';
 
+  private modalService = inject(NgbModal);
+
   private _formStateMessage$ = new Subject<string>();
-  private _formSavedResponse$ = new Subject<string>();
 
   formStateMessage = '';
   showFormSavedInfo = false;
@@ -60,11 +61,6 @@ export class AppComponent implements AfterViewInit {
       tap((message) => (this.formStateMessage = message)),
       debounceTime(4000),
     ).subscribe(() => this.selfClosingAlert?.close());
-
-    this._formSavedResponse$.pipe(
-      takeUntilDestroyed(),
-      debounceTime(4000),
-    ).subscribe(() => this.formSavedInfo?.close());
   }
 
   checkAndSend() {
@@ -92,9 +88,9 @@ export class AppComponent implements AfterViewInit {
         .subscribe({
             next: (v) => {
               console.log("succeeded")
-              this._formSavedResponse$.next("")
               this.showFormSavedInfo = true;
               this.backendService.resetBookingRequest();
+              this.modalService.open("content", {ariaLabelledBy: 'modal-basic-title'})
             },
             error: (e: HttpErrorResponse) => {
               console.error(e.message)

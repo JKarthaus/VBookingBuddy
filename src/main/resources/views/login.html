@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<h1>Login über Google Account</h1>
+
+<h2 th:if="${security}">
+    Anwender: <span th:text="${security.attributes.get('email')}"></span>
+</h2>
+<h2 th:unless="${security}">
+    username: Anonymous
+</h2>
+<nav>
+    <ul>
+        <li th:unless="${security}">
+            <a href="/oauth/login/google">
+                Login mit Google
+            </a>
+        </li>
+        <li th:if="${security}">
+            <a href="/logout">Logout</a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

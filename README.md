@@ -1,3 +1,20 @@
+# VBookingBuddy
+
+## Deploy Frontend
+
+ng build ./frontend/from angular.json
+
+## Deploy Application to GoogleCloudRun
+
+
+
+### Micronaut Guide
+
+https://guides.micronaut.io/latest/micronaut-google-cloud-platform-cloud-run-gradle-java.html
+
+
+    
+
 ## Micronaut 4.5.0 Documentation
 
 - [User Guide](https://docs.micronaut.io/4.5.0/guide/index.html)

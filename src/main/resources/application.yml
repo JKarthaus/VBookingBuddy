@@ -3,6 +3,14 @@ micronaut:
     name: VBookingBuddy
   router:
     static-resources:
+      default:
+        enabled: true
+        paths: classpath:static/browser
+        mapping: /**
+      protected:
+        enabled: true
+        paths: classpath:staticProtected
+        mapping: /protected/**
       swagger:
         paths: classpath:META-INF/swagger
         mapping: /swagger/**

@@ -24,7 +24,7 @@ public class PriceServiceImpl implements PriceService {
     public void init() {
         try {
             priceList = objectMapper.readValue(
-                    loader.getResourceAsStream("classpath:static/priceList.json").get(),
+                    loader.getResourceAsStream("classpath:priceList.json").get(),
                     PriceList.class
             );
             log.info("Price list loaded from resources File");
